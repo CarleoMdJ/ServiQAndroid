@@ -32,7 +32,7 @@ public class splashActivity extends AppCompatActivity {
                     Thread.sleep(25);
                     publishProgress(i);
                 }
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();
             } catch (InterruptedException e) {
