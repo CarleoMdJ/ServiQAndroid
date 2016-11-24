@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import static com.serviq.serviq.R.string.splash;
 
-public class splashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class splashActivity extends AppCompatActivity {
         protected Void doInBackground(String... params) {
             try{
                 for(int i=0; i < 100; i++) {
-                    Thread.sleep(25);
+                    Thread.sleep(1);
                     publishProgress(i);
                 }
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
