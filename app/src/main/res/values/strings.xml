@@ -2,17 +2,24 @@
     <string name="app_name">ServiQ</string>
     <string name="splash">Loading&#8230;</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_signup">Sign Up</string>
 
     <!-- Strings related to login -->
+    <string name="error_login">Invalid Credentials</string>
+    <string name="no_account">No account yet? Join Us</string>
+    <string name="account">Already a member? Login</string>
+    <string name="auth">Authenticating&#8230;</string>
+    <string name="reg">Creating Account&#8230;</string>
+    <string name="prompt_name">Name</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="prompt_re_password">Re-enter Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_up">Create Account</string>
+    <string name="error_email">This email address is invalid</string>
+    <string name="error_password">Between 4 and 10 alphanumeric characters</string>
+    <string name="fail_login">Login failed</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
 </resources>
