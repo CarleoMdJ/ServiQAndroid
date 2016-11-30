@@ -16,10 +16,10 @@
     <string name="prompt_re_password">Re-enter Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_up">Create Account</string>
+    <string name="error_name">At least 4 characters</string>
     <string name="error_email">This email address is invalid</string>
     <string name="error_password">Between 4 and 10 alphanumeric characters</string>
+    <string name="error_re_password">Password do not match</string>
     <string name="fail_login">Login failed</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="fail_signup">Signup failed</string>
 </resources>

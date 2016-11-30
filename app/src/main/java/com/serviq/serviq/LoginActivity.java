@@ -1,7 +1,6 @@
 package com.serviq.serviq;
 
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.serviq.serviq.data.User;
+import com.serviq.serviq.data.UsersDbHelper;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -20,6 +22,7 @@ import butterknife.ButterKnife;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity {
+    private UsersDbHelper mUsersDbHelper;
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     private static final String[] DUMMY_CREDENTIALS = new String[]{
@@ -63,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login() {
+        mUsersDbHelper = new UsersDbHelper(getApplicationContext());
+        User[] users;
         Log.d(TAG, "Login");
 
         if (!validate()) {
@@ -78,7 +83,21 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage(getString(R.string.auth));
         progressDialog.show();
 
-        // TODO: Implement your own authentication logic here.
+        String email = _emailText.getText().toString();
+        String password = _passwordText.getText().toString();
+
+        //users = mUsersDbHelper.getAllUsers(); //arreglar
+
+        _emailText.setError(getString(R.string.error_login));
+        _passwordText.setError(getString(R.string.error_login));
+
+        for (String credential : DUMMY_CREDENTIALS){
+            String[] pieces = credential.split(":");
+            if (pieces[0].equals(email) && pieces[1].equals(password)) {
+                _emailText.setError(null);
+                _passwordText.setError(null);
+            }
+        }
 
 
         new android.os.Handler().postDelayed(
@@ -93,16 +112,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_SIGNUP) {
-            if (resultCode == RESULT_OK) {
-                // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
-                this.finish();
-            }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode == REQUEST_SIGNUP) {
+//            if (resultCode == RESULT_OK) {
+//                Log.d(TAG, "signup");
+//                this.finish();
+//            }
+//        }
+//    }
 
     @Override
     public void onBackPressed() {
@@ -126,6 +144,9 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
+        _emailText.setError(null);
+        _passwordText.setError(null);
+
         if(email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() || password.isEmpty() || password.length() < 4 || password.length() > 10) {
             if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 _emailText.setError(getString(R.string.error_email));
@@ -134,18 +155,8 @@ public class LoginActivity extends AppCompatActivity {
                 _passwordText.setError(getString(R.string.error_password));
             }
         }else{
-            _emailText.setError(getString(R.string.error_login));
-            _passwordText.setError(getString(R.string.error_login));
-            for (String credential : DUMMY_CREDENTIALS){                    //mejorar con una base de datos
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(email) && pieces[1].equals(password)) {
-                    _emailText.setError(null);
-                    _passwordText.setError(null);
-                    return true;
-                }
-            }
+            return true;
         }
         return false;
     }
 }
-

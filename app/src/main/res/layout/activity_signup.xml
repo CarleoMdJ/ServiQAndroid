@@ -30,7 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:hint="@string/prompt_name" />
+                android:hint="@string/prompt_name"
+                android:textColor="@android:color/white" />
         </android.support.design.widget.TextInputLayout>
 
         <!--  Email Label -->
@@ -43,7 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="@string/prompt_email" />
+                android:hint="@string/prompt_email"
+                android:textColor="@android:color/white" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -56,7 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="@string/prompt_password"/>
+                android:hint="@string/prompt_password"
+                android:textColor="@android:color/white"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Re-enter Label -->
@@ -69,7 +72,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="@string/prompt_re_password"/>
+                android:hint="@string/prompt_re_password"
+                android:textColor="@android:color/white"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Signup Button -->

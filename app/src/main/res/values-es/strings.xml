@@ -17,10 +17,10 @@
     <string name="prompt_re_password">Confirma tu contraseña</string>
     <string name="action_sign_in">Iniciar sesión</string>
     <string name="action_sign_up">Crear Cuenta</string>
+    <string name="error_name">Al menos 4 carácteres</string>
     <string name="error_email">Dirección de correo electrónico inválida</string>
     <string name="error_password">Entre 4 y 10 carácteres alfanuméricos</string>
     <string name="fail_login">Error al iniciar sesión</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="error_re_password">Las contraseñas no coinciden</string>
+    <string name="fail_signup">Error al registrarse</string>
 </resources>

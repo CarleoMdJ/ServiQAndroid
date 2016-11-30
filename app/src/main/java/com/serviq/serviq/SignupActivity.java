@@ -11,11 +11,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.serviq.serviq.data.User;
+import com.serviq.serviq.data.UsersDbHelper;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
+    private UsersDbHelper mUsersDbHelper;
+    private String mUserId;
 
     @BindView(R.id.input_name) EditText _nameText;
     @BindView(R.id.input_email) EditText _emailText;
@@ -40,7 +45,6 @@ public class SignupActivity extends AppCompatActivity {
         _loginLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Finish the registration screen and return to the Login activity
                 Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -52,7 +56,7 @@ public class SignupActivity extends AppCompatActivity {
     public void signup() {
         Log.d(TAG, "Signup");
 
-        if (!validate()) {
+        if(!validate()) {
             onSignupFailed();
             return;
         }
@@ -60,17 +64,20 @@ public class SignupActivity extends AppCompatActivity {
         _signupButton.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme);
+                R.style.AppTheme_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.reg));
         progressDialog.show();
 
-        String name = _nameText.getText().toString();
-        String email = _emailText.getText().toString();
+        String nombre = _nameText.getText().toString();
+        String correo = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
 
-        // TODO: Implement your own signup logic here.
+        User user = new User(nombre,correo,password);
+
+        mUsersDbHelper = new UsersDbHelper(getApplicationContext());
+        mUsersDbHelper.saveUser(user);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -88,11 +95,13 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
+        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+        startActivityForResult(intent,0);
         finish();
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), getString(R.string.fail_login), Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), getString(R.string.fail_signup), Toast.LENGTH_LONG).show();
 
         _signupButton.setEnabled(true);
     }
@@ -105,31 +114,35 @@ public class SignupActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
 
-        if (name.isEmpty() || name.length() < 4) {
-            _nameText.setError("at least 4 characters");
+        if(name.isEmpty() || name.length() < 4) {
+            _nameText.setError(getString(R.string.error_name));
             valid = false;
-        } else {
+        }else {
             _nameText.setError(null);
         }
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("enter a valid email address");
+        if(email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            _emailText.setError(getString(R.string.error_email));
             valid = false;
-        } else {
+        }else {
             _emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _passwordText.setError("between 4 and 10 alphanumeric characters");
+        if(password.isEmpty() || password.length() < 4 || password.length() > 10) {
+            _passwordText.setError(getString(R.string.error_password));
             valid = false;
         } else {
             _passwordText.setError(null);
         }
 
-        if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || reEnterPassword.length() > 10 || !(reEnterPassword.equals(password))) {
-            _reEnterPasswordText.setError("Password Do not match");
+        if(reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || reEnterPassword.length() > 10 || !(reEnterPassword.equals(password))) {
+            if(!(reEnterPassword.equals(password))){
+                _reEnterPasswordText.setError(getString(R.string.error_re_password));
+            }else{
+                _reEnterPasswordText.setError(getString(R.string.error_password));
+            }
             valid = false;
-        } else {
+        }else {
             _reEnterPasswordText.setError(null);
         }
 
