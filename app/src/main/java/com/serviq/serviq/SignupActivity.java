@@ -11,16 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.serviq.serviq.data.User;
-import com.serviq.serviq.data.UsersDbHelper;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
-    private UsersDbHelper mUsersDbHelper;
-    private String mUserId;
 
     @BindView(R.id.input_name) EditText _nameText;
     @BindView(R.id.input_email) EditText _emailText;
@@ -73,11 +68,6 @@ public class SignupActivity extends AppCompatActivity {
         String correo = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
-
-        User user = new User(nombre,correo,password);
-
-        mUsersDbHelper = new UsersDbHelper(getApplicationContext());
-        mUsersDbHelper.saveUser(user);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {

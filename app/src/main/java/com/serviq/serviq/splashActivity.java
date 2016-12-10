@@ -2,16 +2,12 @@ package com.serviq.serviq;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import static com.serviq.serviq.R.string.splash;
-
-public class SplashActivity extends AppCompatActivity {
+class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -12,9 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.serviq.serviq.data.User;
-import com.serviq.serviq.data.UsersDbHelper;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -22,7 +19,6 @@ import butterknife.ButterKnife;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity {
-    private UsersDbHelper mUsersDbHelper;
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     private static final String[] DUMMY_CREDENTIALS = new String[]{
@@ -66,8 +62,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login() {
-        mUsersDbHelper = new UsersDbHelper(getApplicationContext());
-        User[] users;
         Log.d(TAG, "Login");
 
         if (!validate()) {
@@ -83,29 +77,30 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage(getString(R.string.auth));
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
-
-        //users = mUsersDbHelper.getAllUsers(); //arreglar
-
-        _emailText.setError(getString(R.string.error_login));
-        _passwordText.setError(getString(R.string.error_login));
-
-        for (String credential : DUMMY_CREDENTIALS){
-            String[] pieces = credential.split(":");
-            if (pieces[0].equals(email) && pieces[1].equals(password)) {
-                _emailText.setError(null);
-                _passwordText.setError(null);
-            }
-        }
-
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
+
+                        String email = _emailText.getText().toString();
+                        String password = _passwordText.getText().toString();
+                        _emailText.setError(getString(R.string.error_login));
+                        _passwordText.setError(getString(R.string.error_login));
+
+                        for (String credential : DUMMY_CREDENTIALS){
+                            String[] pieces = credential.split(":");
+                            if (pieces[0].equals(email) && pieces[1].equals(password)) {
+                                _emailText.setError(null);
+                                _passwordText.setError(null);
+                                onLoginSuccess();
+                            }
+                            else{
+                                onLoginFailed();
+                            }
+                        }
+
+
+
                         progressDialog.dismiss();
                     }
                 }, 3000);
