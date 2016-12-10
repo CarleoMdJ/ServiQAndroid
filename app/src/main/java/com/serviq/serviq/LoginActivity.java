@@ -87,20 +87,21 @@ public class LoginActivity extends AppCompatActivity {
                         _emailText.setError(getString(R.string.error_login));
                         _passwordText.setError(getString(R.string.error_login));
 
-                        for (String credential : DUMMY_CREDENTIALS){
+                        Boolean valido = false;
+                        for (String credential : DUMMY_CREDENTIALS) {
                             String[] pieces = credential.split(":");
-                            if (pieces[0].equals(email) && pieces[1].equals(password)) {
-                                _emailText.setError(null);
-                                _passwordText.setError(null);
-                                onLoginSuccess();
-                            }
-                            else{
-                                onLoginFailed();
+                            if (pieces[0].equals(email) && pieces[1].equals(password)){
+                                valido = true;
+                                break;
                             }
                         }
-
-
-
+                        if (valido) {
+                            _emailText.setError(null);
+                            _passwordText.setError(null);
+                            onLoginSuccess();
+                        }else{
+                            onLoginFailed();
+                        }
                         progressDialog.dismiss();
                     }
                 }, 3000);
