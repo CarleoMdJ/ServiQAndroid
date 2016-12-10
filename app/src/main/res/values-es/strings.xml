@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ServiQ</string>
-    <string name="splash">&#8230;</string>
+    <string name="splash">Cargando&#8230;</string>
     <string name="title_activity_login">Iniciar Sesión</string>
     <string name="title_activity_signup">Registrarse</string>
 
