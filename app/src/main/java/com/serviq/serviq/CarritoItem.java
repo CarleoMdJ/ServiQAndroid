@@ -6,6 +6,7 @@ package com.serviq.serviq;
 
 public class CarritoItem
 {
+    private long id;
     private int cantidad;
     private Comida comida;
     private String descripcion;
@@ -39,5 +40,17 @@ public class CarritoItem
 
     public Comida getComida() {
         return comida;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setComida(Comida comida) {
+        this.comida = comida;
     }
 }
