@@ -22,6 +22,18 @@ public class ServiqDBOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TIME = "tiempo";
     public static final String COLUMN_IMAGE = "imagen";
 
+    public static final String TABLE_CARRITO_ITEM = "carrito_item";
+    public static final String ITEM_COLUMN_ID = "id";
+    public static final String ITEM_COLUMN_DESC = "descripcion";
+    public static final String ITEM_COLUMN_CANT = "cantidad";
+    public static final String ITEM_COMIDA_ID = "comida_id";
+
+    private static final String TABLE_CARRITO_CREATE = "CREATE TABLE "
+            + TABLE_CARRITO_ITEM + "(" + ITEM_COLUMN_ID + " INTEGER PRIMARY KEY, "
+            + ITEM_COLUMN_DESC + " TEXT, " + ITEM_COLUMN_CANT + " NUMERIC, "
+            + ITEM_COMIDA_ID + " INT, " + "FOREIGN KEY(" + ITEM_COMIDA_ID + ") REFERENCES "
+            + COLUMN_ID + "(id) " + ")";
+
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_COMIDA +  " (" +
             COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -36,12 +48,14 @@ public class ServiqDBOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(TABLE_CREATE);
+        sqLiteDatabase.execSQL(TABLE_CARRITO_CREATE);
         Log.i("ServiQ", "Table has been created ;D");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_COMIDA);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CARRITO_ITEM);
         onCreate(sqLiteDatabase);
     }
 }
