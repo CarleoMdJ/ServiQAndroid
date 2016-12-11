@@ -18,6 +18,8 @@ public class CarritoItem
         this.descripcion = descripcion;
     }
 
+    public CarritoItem() {}
+
     public void setCantidad(int cantidad)
     {
         this.cantidad = cantidad;
