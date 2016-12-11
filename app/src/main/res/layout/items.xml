@@ -66,14 +66,14 @@
                 android:layout_width="60dip"
                 android:layout_height="54dp"
                 android:padding="8dp"
-                android:src="@drawable/like" />
+                android:src="@drawable/fav" />
 
             <ImageView
                 android:id="@+id/shareImageView"
                 android:layout_width="60dip"
                 android:layout_height="49dp"
                 android:padding="8dp"
-                android:src="@drawable/truck" />
+                android:src="@drawable/shopping" />
         </LinearLayout>
 
 

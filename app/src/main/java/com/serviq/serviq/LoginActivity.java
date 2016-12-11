@@ -2,7 +2,9 @@ package com.serviq.serviq;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -39,11 +41,24 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        /**
+         * Inicializamos el Sharedpreference con el email.
+         */
+        _emailText = (EditText) findViewById(R.id.input_email);
+        SharedPreferences sharedPreferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
+        _emailText.setText(sharedPreferences.getString("mail", ""));
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                /** Usamos el boton de Login para guardar
+                 * el email del usuario en el Sharedpreference.
+                 */
+                SharedPreferences sharedPreferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("mail", _emailText.getText().toString());
+                editor.commit();
                 login();
             }
         });
