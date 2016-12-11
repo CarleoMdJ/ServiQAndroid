@@ -58,13 +58,13 @@ public class ComidaAdapter extends RecyclerView.Adapter<ComidaAdapter.MyViewHold
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "Agregado a favoritos", Toast.LENGTH_LONG);
+                Toast.makeText(mContext, "Agregado a favoritos", Toast.LENGTH_LONG).show();
             }
         });
         holder.fast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "Carrito rapido", Toast.LENGTH_LONG);
+                Toast.makeText(mContext, "Carrito rapido", Toast.LENGTH_LONG).show();
             }
         });
     }
