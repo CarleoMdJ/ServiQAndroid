@@ -32,19 +32,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /**
+         * CardViews.
+         */
         initCollapsingToolbar();
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         comidaList = new ArrayList<>();
         adapter = new ComidaAdapter(this, comidaList);
-
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+        /**
+         * Prueba de Database.
+         */
         comidas();
-
         dataSource = new ComidaDataSource(this);
         dataSource.open();
         List<Comida> comidas = dataSource.findAll();
