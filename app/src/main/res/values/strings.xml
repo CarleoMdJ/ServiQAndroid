@@ -3,6 +3,7 @@
     <string name="splash">Loading&#8230;</string>
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_signup">Sign Up</string>
+    <string name="action_settings">Settings</string>
 
     <!-- Strings related to login -->
     <string name="error_login">Invalid Credentials</string>

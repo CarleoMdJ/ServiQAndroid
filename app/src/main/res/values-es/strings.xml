@@ -4,6 +4,7 @@
     <string name="splash">Cargando&#8230;</string>
     <string name="title_activity_login">Iniciar Sesión</string>
     <string name="title_activity_signup">Registrarse</string>
+    <string name="action_settings">Ajustes</string>
 
     <!-- Strings related to login -->
     <string name="error_login">Credenciales inválidas</string>
