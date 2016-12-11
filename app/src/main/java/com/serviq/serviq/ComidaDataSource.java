@@ -79,4 +79,21 @@ public class ComidaDataSource
         return comidas;
     }
 
+    public Comida getComidaById(long id)
+    {
+        Cursor cursor = database.query(ServiqDBOpenHelper.TABLE_COMIDA, allColumns, ServiqDBOpenHelper.COLUMN_ID + " = ?",
+                new String[] {String.valueOf(id)}, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        Comida comida = new Comida();
+        comida.setId(cursor.getLong(cursor.getColumnIndex(ServiqDBOpenHelper.COLUMN_ID)));
+        comida.setComida(cursor.getString(cursor.getColumnIndex(ServiqDBOpenHelper.COLUMN_TITLE)));
+        comida.setDescripcion(cursor.getString(cursor.getColumnIndex(ServiqDBOpenHelper.COLUMN_DESC)));
+        comida.setPrecio(cursor.getDouble(cursor.getColumnIndex(ServiqDBOpenHelper.COLUMN_PRICE)));
+        comida.setTiempo(cursor.getDouble(cursor.getColumnIndex(ServiqDBOpenHelper.COLUMN_TIME)));
+
+        return comida;
+    }
+
 }
