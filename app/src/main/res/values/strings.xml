@@ -4,6 +4,9 @@
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_signup">Sign Up</string>
     <string name="action_settings">Settings</string>
+    <string name="tabFav">Favorites</string>
+    <string name="tabMenu">Menu</string>
+    <string name="tabCart">Cart</string>
 
     <!-- Strings related to login -->
     <string name="error_login">Invalid Credentials</string>
