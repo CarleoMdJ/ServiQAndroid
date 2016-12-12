@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -26,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@gmail.com:hello", "bar@example.com:world"
     };
+    private UserDataSource dataSource;
 
     @BindView(R.id.input_email)
     EditText _emailText;
@@ -102,10 +105,15 @@ public class LoginActivity extends AppCompatActivity {
                         _emailText.setError(getString(R.string.error_login));
                         _passwordText.setError(getString(R.string.error_login));
 
+                        dataSource = new UserDataSource(getApplicationContext());
+                        dataSource.open();
+
+                        List<User> users = dataSource.findAll();
+                        dataSource.close();
+
                         Boolean valido = false;
-                        for (String credential : DUMMY_CREDENTIALS) {
-                            String[] pieces = credential.split(":");
-                            if (pieces[0].equals(email) && pieces[1].equals(password)){
+                        for (User user : users) {
+                            if (user.getCorreo().equals(email) && user.getPassword().equals(password)){
                                 valido = true;
                                 break;
                             }

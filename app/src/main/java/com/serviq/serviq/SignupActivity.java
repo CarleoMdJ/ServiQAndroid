@@ -11,11 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
+    private UserDataSource dataSource;
 
     @BindView(R.id.input_name) EditText _nameText;
     @BindView(R.id.input_email) EditText _emailText;
@@ -67,7 +70,13 @@ public class SignupActivity extends AppCompatActivity {
         String nombre = _nameText.getText().toString();
         String correo = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
-        String reEnterPassword = _reEnterPasswordText.getText().toString();
+
+        dataSource = new UserDataSource(getApplicationContext());
+        dataSource.open();
+
+        User user = new User(nombre,correo,password);
+        user = dataSource.create(user);
+        dataSource.close();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -79,6 +88,40 @@ public class SignupActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 }, 3000);
+
+//        new android.os.Handler().postDelayed(
+//                new Runnable() {
+//                    public void run() {
+//                        UserDataSource dataSource = new UserDataSource(getApplicationContext());
+//                        Boolean valido = true;
+//                        String nombre = _nameText.getText().toString();
+//                        String correo = _emailText.getText().toString();
+//                        String password = _passwordText.getText().toString();
+//
+//
+//                        List<User> users = dataSource.findAll();
+//
+//                        if (!users.isEmpty()){
+//                            for (User user : users){
+//                                if (user.getCorreo().equals(correo)){
+//                                    valido = false;
+//                                }
+//                            }
+//                        }
+//
+//                        if (valido) {
+//                            User user = new User(nombre,correo,password);
+//                            user = dataSource.create(user);
+//                            onSignupSuccess();
+//                        }else{
+//                            onSignupFailed();
+//                        }
+//                        progressDialog.dismiss();
+//                    }
+//                }, 3000);
+
+
+
     }
 
 

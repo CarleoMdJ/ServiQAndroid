@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,15 +32,27 @@ public class FragMenu extends Fragment {
     private ComidaAdapter adapter;
     private List<Comida> comidaList;
 
+    CustomPagerAdapter mCustomPagerAdapter;
+    ViewPager mViewPager;
+    int[] mResources;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.content_menu, container,false);
 
-//        TextView textView = (TextView) view.findViewById(R.id.textView);
-//        Resources res = getResources();
-//        textView.setText("Estás en favoritos");
+        int[] mResources = {
+                R.drawable.hamburguesa,
+                R.drawable.hotdog,
+                R.drawable.pizza
+        };
+
+        mCustomPagerAdapter = new CustomPagerAdapter(getContext());
+        mCustomPagerAdapter.setmResources(mResources);
+
+        mViewPager = (ViewPager) view.findViewById(R.id.pager);
+        mViewPager.setAdapter(mCustomPagerAdapter);
 
         /**
          * CardViews.
@@ -66,7 +79,6 @@ public class FragMenu extends Fragment {
 
         return view;
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -28,6 +28,12 @@ public class ServiqDBOpenHelper extends SQLiteOpenHelper {
     public static final String ITEM_COLUMN_CANT = "cantidad";
     public static final String ITEM_COMIDA_ID = "comida_id";
 
+    public static final String TABLE_USER = "user";
+    public static final String COLUMN_USER_ID = "id";
+    public static final String COLUMN_NOMBRE = "nombre";
+    public static final String COLUMN_CORREO = "correo";
+    public static final String COLUMN_PASSWORD = "password";
+
     private static final String TABLE_CARRITO_CREATE = "CREATE TABLE "
             + TABLE_CARRITO_ITEM + "(" + ITEM_COLUMN_ID + " INTEGER PRIMARY KEY, "
             + ITEM_COLUMN_DESC + " TEXT, " + ITEM_COLUMN_CANT + " NUMERIC, "
@@ -41,6 +47,12 @@ public class ServiqDBOpenHelper extends SQLiteOpenHelper {
             COLUMN_PRICE + " NUMERIC, " + COLUMN_TIME + " NUMERIC, " +
             COLUMN_IMAGE + " TEXT " + ")";
 
+    private static final String TABLE_USER_CREATE = "CREATE TABLE "
+            + TABLE_USER + "(" + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COLUMN_NOMBRE + " TEXT NOT NULL, " + COLUMN_CORREO + " TEXT NOT NULL, "
+            + COLUMN_PASSWORD + " TEXT NOT NULL, "
+            + "UNIQUE (" + COLUMN_CORREO + ")";
+
     public ServiqDBOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -49,6 +61,8 @@ public class ServiqDBOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(TABLE_CREATE);
         sqLiteDatabase.execSQL(TABLE_CARRITO_CREATE);
+        sqLiteDatabase.execSQL(TABLE_USER);
+
         Log.i("ServiQ", "Table has been created ;D");
     }
 
@@ -56,6 +70,8 @@ public class ServiqDBOpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_COMIDA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CARRITO_ITEM);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_USER_CREATE);
+
         onCreate(sqLiteDatabase);
     }
 }
